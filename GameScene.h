@@ -77,5 +77,10 @@ private: // メンバ変数
 	FbxObject3d *fbxobject1 = nullptr;
 	FbxObject3d *fbxobject2 = nullptr;
 	FbxObject3d *fbxobject3 = nullptr;
+
+	const float g = -9.8 / 60.0f; // 重力加速度
+	float v = 0.0f; // 速度
+	float t; // 時間
+	float y = 100.0f; // 距離
 };
 
