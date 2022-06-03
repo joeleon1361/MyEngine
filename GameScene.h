@@ -27,25 +27,25 @@ private: // 静的メンバ変数
 	static const int debugTextTexNumber = 0;
 
 public: // メンバ関数
-	
+
 	// コンストクラタ
 	GameScene();
-	
+
 	// デストラクタ
 	~GameScene();
-	
+
 	// 初期化
 	void Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio);
-	
+
 	// 毎フレーム処理
 	void Update();
-	
+
 	// 描画
 	void Draw();
 
 	// カメラ移動
 	void MoveCamera();
-	
+
 	// パーティクル生成
 	void CreateParticles();
 
@@ -53,30 +53,30 @@ private: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
 	Audio* audio = nullptr;
-	DebugText debugText;	
+	DebugText debugText;
 
 	// ゲームシーン用
-	Camera *camera = nullptr;
-	 
+	Camera* camera = nullptr;
+
 	Sprite* spriteBG = nullptr;
 
-	ParticleManager *particleMan = nullptr;
+	ParticleManager* particleMan = nullptr;
 
 	Model* modelSkydome = nullptr;
 	Model* modelGround = nullptr;
 	Model* modelFighter = nullptr;
 
-	FbxModel *fbxmodel1 = nullptr;
-	FbxModel *fbxmodel2 = nullptr;
-	FbxModel *fbxmodel3 = nullptr;
+	FbxModel* fbxmodel1 = nullptr;
+	FbxModel* fbxmodel3 = nullptr;
+	FbxModel* testmodel = nullptr;
 
 	Object3d* objSkydome = nullptr;
 	Object3d* objGround = nullptr;
 	Object3d* objFighter = nullptr;
 
-	FbxObject3d *fbxobject1 = nullptr;
-	FbxObject3d *fbxobject2 = nullptr;
-	FbxObject3d *fbxobject3 = nullptr;
+	FbxObject3d* fbxobject1 = nullptr;
+	FbxObject3d* fbxobject3 = nullptr;
+	FbxObject3d* testobject = nullptr;
 
 	const float g = -9.8 / 60.0f; // 重力加速度
 	float v = 0.0f; // 速度

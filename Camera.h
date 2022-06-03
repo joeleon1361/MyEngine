@@ -106,7 +106,7 @@ protected: // メンバ変数
 	// 視点座標
 	XMFLOAT3 eye = { 0, 1, -10 };
 	// 注視点座標
-	XMFLOAT3 target = { 0, 0, 0 };
+	XMFLOAT3 target = { 0, 2.5f, 0 };
 	// 上方向ベクトル
 	XMFLOAT3 up = { 0, 1, 0 };
 	// アスペクト比

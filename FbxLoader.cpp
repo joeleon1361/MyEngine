@@ -4,7 +4,7 @@
 using namespace DirectX;
 
 // 静的メンバ変数の実体
-const std::string FbxLoader::baseDirectory = "Resources/";
+const std::string FbxLoader::baseDirectory = "Resources/FbxModel/";
 
 const std::string FbxLoader::defaultTextureFileName = "white1x1.png";
 
@@ -219,7 +219,6 @@ void FbxLoader::ParseMeshVertices( FbxModel *fbxmodel, FbxMesh *fbxMesh )
 // 面情報読み取り
 void FbxLoader::ParseMeshFaces( FbxModel *fbxmodel, FbxMesh *fbxMesh )
 {
-#pragma region 面の数、UVの数を読み取る
     auto &vertices = fbxmodel->vertices;
     auto &indices = fbxmodel->indices;
 
@@ -233,7 +232,6 @@ void FbxLoader::ParseMeshFaces( FbxModel *fbxmodel, FbxMesh *fbxMesh )
     // UV名リスト
     FbxStringList uvNames;
     fbxMesh->GetUVSetNames( uvNames );
-#pragma endregion
 
     // 面ごとの情報読み取り
     for ( int i = 0; i < polygonCount; i++ )

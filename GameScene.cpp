@@ -26,10 +26,10 @@ GameScene::~GameScene()
 
 	safe_delete(fbxobject1);
 	safe_delete(fbxmodel1);
-	safe_delete(fbxobject2);
-	safe_delete(fbxmodel2);
 	safe_delete(fbxobject3);
 	safe_delete(fbxmodel3);
+	safe_delete(testmodel);
+	safe_delete(testobject);
 }
 
 void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
@@ -68,7 +68,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	debugText.Initialize(debugTextTexNumber);
 
 	// テクスチャ読み込み
-	if (!Sprite::LoadTexture(1, L"Resources/background.png")) {
+	if (!Sprite::LoadTexture(1, L"Resources/Sprite/background.png")) {
 		assert(0);
 		return;
 	}
@@ -84,7 +84,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objFighter = Object3d::Create();
 
 	// テクスチャ2番に読み込み
-	Sprite::LoadTexture(2, L"Resources/texture.png");
+	Sprite::LoadTexture(2, L"Resources/Sprite/texture.png");
 
 	modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
@@ -94,96 +94,62 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objGround->SetModel(modelGround);
 	objFighter->SetModel(modelFighter);
 
-	//fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bonetest" );
-	//fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "untitled" );
 	fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile("Fast Run");
-
-	fbxmodel2 = FbxLoader::GetInstance()->LoadModelFromFile("Strut Walking");
 	fbxmodel3 = FbxLoader::GetInstance()->LoadModelFromFile("Standing W_Briefcase Idle");
+	testmodel = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 
 	// FBX3Dオブジェクト生成とモデルとセット
 	fbxobject1 = new FbxObject3d;
 	fbxobject1->Initialize();
 	fbxobject1->SetModel(fbxmodel1);
 
-	fbxobject2 = new FbxObject3d;
-	fbxobject2->Initialize();
-	fbxobject2->SetModel(fbxmodel2);
-
 	fbxobject3 = new FbxObject3d;
 	fbxobject3->Initialize();
 	fbxobject3->SetModel(fbxmodel3);
 
-	fbxobject1->SetPosition({ 0,10,60 });
-	fbxobject1->SetScale({ 1,1,1 });
+	testobject = new FbxObject3d;
+	testobject->Initialize();
+	testobject->SetModel(testmodel);
 }
 
 void GameScene::Update()
 {
 	// オブジェクト移動
-	//if (input->PushKey(DIK_I) || input->PushKey(DIK_K) || input->PushKey(DIK_J) || input->PushKey(DIK_L))
-	//{
-	//	// 現在の座標を取得
-	//	XMFLOAT3 position = objFighter->GetPosition();
+	if (input->PushKey(DIK_I) || input->PushKey(DIK_K) || input->PushKey(DIK_J) || input->PushKey(DIK_L))
+	{
+		// 現在の座標を取得
+		XMFLOAT3 PlayerPosition1 = fbxobject1->GetPosition();
+		XMFLOAT3 PlayerPosition3 = fbxobject3->GetPosition();
 
-	//	// 移動後の座標を計算
-	//	/*if ( input->PushKey( DIK_I ) ) { position.y += 1.0f; }
-	//	else if ( input->PushKey( DIK_K ) ) { position.y -= 1.0f; }
-	//	if ( input->PushKey( DIK_L ) ) { position.x += 1.0f; }
-	//	else if ( input->PushKey( DIK_J ) ) { position.x -= 1.0f; }*/
+		// 移動後の座標を計算
+		if (input->PushKey(DIK_I))
+		{
+			PlayerPosition1.z += 1.0f;
+			PlayerPosition3.z += 1.0f;
+		}
+		else if (input->PushKey(DIK_K))
+		{
+			PlayerPosition1.z -= 1.0f;
+			PlayerPosition3.z -= 1.0f;
+		}
+		if (input->PushKey(DIK_L))
+		{
+			PlayerPosition1.x += 1.0f;
+			PlayerPosition3.x += 1.0f;
+		}
+		else if (input->PushKey(DIK_J))
+		{
+			PlayerPosition1.x -= 1.0f;
+			PlayerPosition3.x -= 1.0f;
+		}
 
-	//	// 座標の変更を反映
-	//	objFighter->SetPosition(position);
-
-	//	// 現在の座標を取得
-	//	XMFLOAT3 PlayerPosition1 = fbxobject1->GetPosition();
-	//	XMFLOAT3 PlayerPosition3 = fbxobject3->GetPosition();
-
-	//	// 移動後の座標を計算
-	//	if (input->PushKey(DIK_I))
-	//	{
-	//		PlayerPosition1.z += 1.0f;
-	//		PlayerPosition3.z += 1.0f;
-	//	}
-	//	else if (input->PushKey(DIK_K))
-	//	{
-	//		PlayerPosition1.z -= 1.0f;
-	//		PlayerPosition3.z -= 1.0f;
-	//	}
-	//	if (input->PushKey(DIK_L))
-	//	{
-	//		PlayerPosition1.x += 1.0f;
-	//		PlayerPosition3.x += 1.0f;
-	//	}
-	//	else if (input->PushKey(DIK_J))
-	//	{
-	//		PlayerPosition1.x -= 1.0f;
-	//		PlayerPosition3.x -= 1.0f;
-	//	}
-
-	//	// 座標の変更を反映
-	//	fbxobject1->SetPosition(PlayerPosition1);
-	//	fbxobject3->SetPosition(PlayerPosition3);
-
-	//	// 現在の座標を取得
-	//	XMFLOAT3 PlayerPosition2 = fbxobject2->GetPosition();
-
-	//	// 移動後の座標を計算
-	//	/*if ( input->PushKey( DIK_I ) ) { PlayerPosition2.y += 1.0f; }
-	//	else if ( input->PushKey( DIK_K ) ) { PlayerPosition2.y -= 1.0f; }
-	//	if ( input->PushKey( DIK_L ) ) { PlayerPosition2.x += 1.0f; }
-	//	else if ( input->PushKey( DIK_J ) ) { PlayerPosition2.x -= 1.0f; }*/
-
-	//	// 座標の変更を反映
-	//	fbxobject2->SetPosition(PlayerPosition2);
-	//}
+		// 座標の変更を反映
+		fbxobject1->SetPosition(PlayerPosition1);
+		fbxobject3->SetPosition(PlayerPosition3);
+	}
 
 	// 現在の座標を取得
 	XMFLOAT3 PlayerPosition1 = fbxobject1->GetPosition();
-
-	// 自由落下
-	v += g;
-	PlayerPosition1.y += v;
 
 	// 座標の変更を反映
 	fbxobject1->SetPosition(PlayerPosition1);
@@ -200,8 +166,8 @@ void GameScene::Update()
 	objFighter->Update();
 
 	fbxobject1->Update();
-	fbxobject2->Update();
 	fbxobject3->Update();
+	testobject->Update();
 
 	debugText.Print("AD: move camera LeftRight", 50, 50, 1.0f);
 	debugText.Print("WS: move camera UpDown", 50, 70, 1.0f);
@@ -236,21 +202,19 @@ void GameScene::Draw()
 	 objGround->Draw();*/
 	 //objFighter->Draw();
 
-	 /*if (input->PushKey(DIK_I) || input->PushKey(DIK_K) || input->PushKey(DIK_J) || input->PushKey(DIK_L))
-	 {
-		 if (input->PushKey(DIK_I)) { fbxobject1->Draw(cmdList); }
-		 else if (input->PushKey(DIK_K)) { fbxobject1->Draw(cmdList); }
-		 if (input->PushKey(DIK_L)) { fbxobject1->Draw(cmdList); }
-		 else if (input->PushKey(DIK_J)) { fbxobject1->Draw(cmdList); }
-	 }
-	 else
-	 {
-		 fbxobject3->Draw(cmdList);
-	 }*/
+	/*if (input->PushKey(DIK_I) || input->PushKey(DIK_K) || input->PushKey(DIK_J) || input->PushKey(DIK_L))
+	{
+		if (input->PushKey(DIK_I)) { fbxobject1->Draw(cmdList); }
+		else if (input->PushKey(DIK_K)) { fbxobject1->Draw(cmdList); }
+		if (input->PushKey(DIK_L)) { fbxobject1->Draw(cmdList); }
+		else if (input->PushKey(DIK_J)) { fbxobject1->Draw(cmdList); }
+	}
+	else
+	{
+		fbxobject3->Draw(cmdList);
+	}*/
 
-	fbxobject1->Draw(cmdList);
-	//fbxobject2->Draw(cmdList);
-
+	testobject->Draw(cmdList);
 
 	// パーティクルの描画
 	//particleMan->Draw(cmdList);
@@ -267,7 +231,7 @@ void GameScene::Draw()
 
 	// ここに前景スプライトの描画処理を追加できる
 
-	//// 描画
+	// 描画
 	//sprite1->Draw();
 	//sprite2->Draw();
 

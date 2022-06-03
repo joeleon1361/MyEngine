@@ -5,58 +5,69 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="シェーダ ファイル">
       <UniqueIdentifier>{bf37cf7d-f251-4a63-8470-5b9359b9b57d}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダ ファイル">
       <UniqueIdentifier>{2488e371-56ff-4c4a-965e-02a85c9493ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3D">
+      <UniqueIdentifier>{26aae6d9-8c06-4dec-bd5d-0bbf67bc3fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D">
+      <UniqueIdentifier>{5643292a-0e45-4efa-94aa-ec5cc0393947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Objファイル">
+      <UniqueIdentifier>{bf51be95-e1ae-4b59-97b2-bab82777df36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Fbxファイル">
+      <UniqueIdentifier>{09439076-f7cf-408b-8f38-dc17b8616ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Sprite">
+      <UniqueIdentifier>{70d5a2d9-fe20-41ce-8b65-b4056398c1c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\DebugText">
+      <UniqueIdentifier>{e3fbeecb-b914-4b67-9486-c82b6a9fc9ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{cd3791eb-8182-48b9-bb2e-fbfc9a3dfca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{6bb8e23c-a0a8-43cd-82a8-356949ccb222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Objファイル\ObjModel">
+      <UniqueIdentifier>{b7108bf9-d94e-4714-b3f5-c551472ae236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Objファイル\ObjMesh">
+      <UniqueIdentifier>{f97afa36-e1da-473d-826b-41584715f47f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Objファイル\ObjMaterial">
+      <UniqueIdentifier>{66deeb04-d331-47e2-9496-b26af53276f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Objファイル\ObjObject">
+      <UniqueIdentifier>{8d4f662d-b328-4c2b-9f02-3b8d2f416882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Fbxファイル\FbxLoader">
+      <UniqueIdentifier>{a8ad0354-a10c-4a9d-9372-9160ef082fe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Fbxファイル\FbxModel">
+      <UniqueIdentifier>{3acfd19f-4e7a-4440-97fe-d3fe49f97134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Fbxファイル\FbxObject">
+      <UniqueIdentifier>{cfe713fc-ff28-4f73-9a15-65b6518fe75c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{fdc0cf07-70e7-4a36-a95f-07bd90c38eb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Particle">
+      <UniqueIdentifier>{d0859231-da73-4f41-b495-2099a75c9b72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugText.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="DirectXCommon.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="FbxLoader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="FbxModel.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="FbxObject3d.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Object3d.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="WinApp.cpp">
@@ -65,8 +76,44 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="FbxLoader.cpp">
+      <Filter>3D\Fbxファイル\FbxLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="FbxModel.cpp">
+      <Filter>3D\Fbxファイル\FbxModel</Filter>
+    </ClCompile>
+    <ClCompile Include="FbxObject3d.cpp">
+      <Filter>3D\Fbxファイル\FbxObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3d.cpp">
+      <Filter>3D\Objファイル\ObjObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>3D\Objファイル\ObjMaterial</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugText.cpp">
+      <Filter>2D\DebugText</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>2D\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>3D\Objファイル\ObjMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>3D\Objファイル\ObjModel</Filter>
+    </ClCompile>
     <ClCompile Include="ParticleManager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>3D\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,43 +142,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugText.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="FbxLoader.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="FbxModel.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="FbxObject3d.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Object3d.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SafeDelete.h">
-      <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
       <Filter>ヘッダ ファイル</Filter>
     </ClInclude>
     <ClInclude Include="WinApp.h">
@@ -140,8 +151,44 @@
     <ClInclude Include="GameScene.h">
       <Filter>ヘッダ ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="FbxLoader.h">
+      <Filter>3D\Fbxファイル\FbxLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxModel.h">
+      <Filter>3D\Fbxファイル\FbxModel</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxObject3d.h">
+      <Filter>3D\Fbxファイル\FbxObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3d.h">
+      <Filter>3D\Objファイル\ObjObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>3D\Objファイル\ObjMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugText.h">
+      <Filter>2D\DebugText</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>2D\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>3D\Objファイル\ObjMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>3D\Objファイル\ObjModel</Filter>
+    </ClInclude>
     <ClInclude Include="ParticleManager.h">
-      <Filter>ヘッダ ファイル</Filter>
+      <Filter>3D\Particle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
