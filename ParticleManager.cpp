@@ -180,7 +180,7 @@ void ParticleManager::Draw(ID3D12GraphicsCommandList * cmdList)
 	cmdList->DrawInstanced(drawNum, 1, 0, 0);
 }
 
-void ParticleManager::Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale)
+void ParticleManager::Add(int life, const XMFLOAT3& position, const XMFLOAT3& velocity, const XMFLOAT3& accel, float start_scale, float end_scale)
 {
 	// リストに要素を追加
 	particles.emplace_front();
@@ -200,7 +200,7 @@ void ParticleManager::InitializeDescriptorHeap()
 
 	// デスクリプタヒープを生成	
 	D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc = {};
-	descHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+	descHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;                                                                                    
 	descHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;//シェーダから見えるように
 	descHeapDesc.NumDescriptors = 1; // シェーダーリソースビュー1つ
 	result = device->CreateDescriptorHeap(&descHeapDesc, IID_PPV_ARGS(&descHeap));//生成

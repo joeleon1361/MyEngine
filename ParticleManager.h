@@ -83,15 +83,15 @@ public: // 静的メンバ関数
 public: // メンバ関数	
 	// 初期化
 	void Initialize();
-	
+
 	// 毎フレーム処理
 	void Update();
 
 	// 描画
-	void Draw(ID3D12GraphicsCommandList * cmdList);
+	void Draw(ID3D12GraphicsCommandList* cmdList);
 
 	// パーティクルの追加
-	void Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale );
+	void Add(int life, const XMFLOAT3& position, const XMFLOAT3& velocity, const XMFLOAT3& accel, float start_scale, float end_scale);
 
 	// デスクリプタヒープの初期化
 	void InitializeDescriptorHeap();

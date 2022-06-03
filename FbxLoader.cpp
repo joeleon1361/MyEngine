@@ -14,6 +14,7 @@ FbxLoader* FbxLoader::GetInstance()
     return &instance;
 }
 
+// 行列の変換(定義)
 void FbxLoader::ConvertMatrixFromFbx( DirectX::XMMATRIX *dst, const FbxAMatrix &src )
 {
     // 行
@@ -28,6 +29,7 @@ void FbxLoader::ConvertMatrixFromFbx( DirectX::XMMATRIX *dst, const FbxAMatrix &
     }
 }
 
+// FBX SDK の初期化
 void FbxLoader::Initialize( ID3D12Device *device )
 {
     // 再初期化チェック
@@ -47,6 +49,7 @@ void FbxLoader::Initialize( ID3D12Device *device )
     fbxImporter = FbxImporter::Create( fbxManager, "" );
 }
 
+// FBX SDK の後始末
 void FbxLoader:: Finalize()
 {
     // 各種FBXインスタンスの破棄
@@ -54,8 +57,10 @@ void FbxLoader:: Finalize()
     fbxManager->Destroy();
 }
 
+// FBX ファイルの読み込み
 FbxModel* FbxLoader::LoadModelFromFile( const string &modelName )
 {
+#pragma region FBX ファイルの読み込み
     // モデルと同じ名前のフォルダから読み込む
     const string directoryPath = baseDirectory + modelName + "/";
 
@@ -70,12 +75,15 @@ FbxModel* FbxLoader::LoadModelFromFile( const string &modelName )
     {
         assert( 0 );
     }
+#pragma endregion
 
+#pragma region シーンのインポート
     // シーン生成
     FbxScene *fbxScene = FbxScene::Create( fbxManager, "fbxScene" );
 
     // ファイルからロードしたFBXの情報をシーンにインポート
     fbxImporter->Import( fbxScene );
+#pragma endregion
 
     // モデル生成
     FbxModel *fbxmodel = new FbxModel();
@@ -100,6 +108,7 @@ FbxModel* FbxLoader::LoadModelFromFile( const string &modelName )
     return fbxmodel;
 }
 
+// 解析関数(再帰)
 void FbxLoader::ParseNodeRecursive( FbxModel *fbxmodel, FbxNode *fbxNode, Node* parent )
 {
     // モデルにノードを追加
@@ -160,6 +169,7 @@ void FbxLoader::ParseNodeRecursive( FbxModel *fbxmodel, FbxNode *fbxNode, Node* 
     }
 }
 
+// メッシュ解析関数
 void FbxLoader::ParseMesh( FbxModel *fbxmodel, FbxNode *fbxNode )
 {
     // ノードのメッシュを取得
@@ -178,6 +188,8 @@ void FbxLoader::ParseMesh( FbxModel *fbxmodel, FbxNode *fbxNode )
     ParseSkin( fbxmodel, fbxMesh );
 }
 
+#pragma region メッシュ解析用の関数(サブ関数)
+// 頂点座標読み取り
 void FbxLoader::ParseMeshVertices( FbxModel *fbxmodel, FbxMesh *fbxMesh )
 {
     auto &vertices = fbxmodel->vertices;
@@ -204,8 +216,10 @@ void FbxLoader::ParseMeshVertices( FbxModel *fbxmodel, FbxMesh *fbxMesh )
     }
 }
 
+// 面情報読み取り
 void FbxLoader::ParseMeshFaces( FbxModel *fbxmodel, FbxMesh *fbxMesh )
 {
+#pragma region 面の数、UVの数を読み取る
     auto &vertices = fbxmodel->vertices;
     auto &indices = fbxmodel->indices;
 
@@ -219,6 +233,8 @@ void FbxLoader::ParseMeshFaces( FbxModel *fbxmodel, FbxMesh *fbxMesh )
     // UV名リスト
     FbxStringList uvNames;
     fbxMesh->GetUVSetNames( uvNames );
+#pragma endregion
+
     // 面ごとの情報読み取り
     for ( int i = 0; i < polygonCount; i++ )
     {
@@ -233,6 +249,7 @@ void FbxLoader::ParseMeshFaces( FbxModel *fbxmodel, FbxMesh *fbxMesh )
             int index = fbxMesh->GetPolygonVertex( i, j );
             assert( index >= 0 );
 
+#pragma region 法線情報読み取り
             // 頂点法線読み込み
             FbxModel::VertexPosNormalUvSkin &vertex = vertices[index];
             FbxVector4 normal;
@@ -242,7 +259,9 @@ void FbxLoader::ParseMeshFaces( FbxModel *fbxmodel, FbxMesh *fbxMesh )
                 vertex.normal.y = (float)normal[1];
                 vertex.normal.z = (float)normal[2];
             }
+#pragma endregion
 
+#pragma region UV情報読み取り
             // テクスチャUV読み込み
             if ( textureUVCount > 0 )
             {
@@ -256,7 +275,9 @@ void FbxLoader::ParseMeshFaces( FbxModel *fbxmodel, FbxMesh *fbxMesh )
                     vertex.uv.y = (float)uvs[1];
                 }
             }
+#pragma endregion
 
+#pragma region 頂点インデックス追加
             // インデックス配列に頂点インデックス追加
             // 3頂点までなら
             if ( j < 3 )
@@ -276,10 +297,12 @@ void FbxLoader::ParseMeshFaces( FbxModel *fbxmodel, FbxMesh *fbxMesh )
                 indices.push_back( index3 );
                 indices.push_back( index0 );
             }
+#pragma endregion
         }
     }
 }
 
+// マテリアル読み取り
 void FbxLoader::ParseMaterial( FbxModel *fbxmodel, FbxNode *fbxNode )
 {
     const int materialCount = fbxNode->GetMaterialCount();
@@ -339,8 +362,32 @@ void FbxLoader::ParseMaterial( FbxModel *fbxmodel, FbxNode *fbxNode )
     }
 }
 
+// テクスチャの読み込み
+void FbxLoader::LoadTexture(FbxModel* fbxmodel, const std::string& fullpath)
+{
+    HRESULT result = S_FALSE;
+
+    // WICテクスチャのロード
+    TexMetadata& metadata = fbxmodel->metadata;
+    ScratchImage& scratchImg = fbxmodel->scratchImg;
+
+    // ユニコード文字列に変換
+    wchar_t wfilepath[128];
+    MultiByteToWideChar(CP_ACP, 0, fullpath.c_str(), -1, wfilepath, _countof(wfilepath));
+    result = LoadFromWICFile(
+        wfilepath, WIC_FLAGS_NONE,
+        &metadata, scratchImg);
+    if (FAILED(result))
+    {
+        assert(0);
+    }
+}
+#pragma endregion
+
+// スキニング情報読み取り
 void FbxLoader::ParseSkin( FbxModel *fbxmodel, FbxMesh *fbxMesh )
 {
+#pragma region スキニング情報読み取り
     // スキニング情報
     FbxSkin *fbxSkin =
         static_cast<FbxSkin *>(fbxMesh->GetDeformer( 0,
@@ -363,7 +410,9 @@ void FbxLoader::ParseSkin( FbxModel *fbxmodel, FbxMesh *fbxMesh )
     // ボーンの数
     int clusterCount = fbxSkin->GetClusterCount();
     bones.reserve( clusterCount );
+#pragma endregion
 
+#pragma region 初期姿勢行列読み取り
     // 全てのボーンについて
     for ( int i = 0; i < clusterCount; i++ )
     {
@@ -390,7 +439,9 @@ void FbxLoader::ParseSkin( FbxModel *fbxmodel, FbxMesh *fbxMesh )
         // 初期姿勢行列の逆行列を得る
         bone.invInitialPose = XMMatrixInverse( nullptr, initialPose );
     }
+#pragma endregion
 
+#pragma region スキンウェイトの読み取り
     // ボーン番号とスキンウェイトのペア
     struct WeightSet
     {
@@ -424,7 +475,9 @@ void FbxLoader::ParseSkin( FbxModel *fbxmodel, FbxMesh *fbxMesh )
             weightLists[vertIndex].emplace_back( WeightSet{ (UINT)i, weight } );
         }
     }
+#pragma endregion
 
+#pragma region スキンウェイトの整理
     // 頂点配列書き換え用の参照
     auto &vertices = fbxmodel->vertices;
     // 各頂点について処理
@@ -462,28 +515,10 @@ void FbxLoader::ParseSkin( FbxModel *fbxmodel, FbxMesh *fbxMesh )
             }
         }
     }
+#pragma endregion
 }
 
-void FbxLoader::LoadTexture( FbxModel *fbxmodel, const std::string &fullpath )
-{
-    HRESULT result = S_FALSE;
-
-    // WICテクスチャのロード
-    TexMetadata &metadata = fbxmodel->metadata;
-    ScratchImage &scratchImg = fbxmodel->scratchImg;
-
-    // ユニコード文字列に変換
-    wchar_t wfilepath[128];
-    MultiByteToWideChar( CP_ACP, 0, fullpath.c_str(), -1, wfilepath, _countof( wfilepath ) );
-    result = LoadFromWICFile(
-        wfilepath, WIC_FLAGS_NONE,
-        &metadata, scratchImg );
-    if ( FAILED( result ) )
-    {
-        assert( 0 );
-    }
-}
-
+// ファイル名抽出(定義)
 std::string FbxLoader::ExtractFileName( const std::string &path )
 {
     size_t pos1;

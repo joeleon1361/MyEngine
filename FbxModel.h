@@ -10,6 +10,7 @@
 #include <d3dx12.h>
 #include <fbxsdk.h>
 
+// ノードクラス
 struct Node
 {
 	// 名前

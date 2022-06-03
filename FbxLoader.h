@@ -29,10 +29,13 @@ public: // 静的メンバ関数
 	static void ConvertMatrixFromFbx( DirectX::XMMATRIX *dst, const FbxAMatrix &src );
 
 public: // メンバ関数
+	// 初期化
 	void Initialize( ID3D12Device *device );
 
+	// 後始末
 	void Finalize();
 	
+	// モデル名
 	FbxModel* LoadModelFromFile( const string &modelName );
 
 	// 再帰的にノード構成を解析
