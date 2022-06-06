@@ -112,6 +112,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	testobject->SetModel(testmodel);
 
 	// 座標のセット
+	testobject->SetRotation({ 0, 90, 0 });
 }
 
 void GameScene::Update()
