@@ -110,6 +110,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	testobject = new FbxObject3d;
 	testobject->Initialize();
 	testobject->SetModel(testmodel);
+
+	// 座標のセット
 }
 
 void GameScene::Update()
