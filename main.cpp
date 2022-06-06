@@ -3,6 +3,7 @@
 #include "Audio.h"
 #include "GameScene.h"
 #include "fbxsdk.h"
+#include "PostEffect.h"
 #include "FbxLoader.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
@@ -14,6 +15,7 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 	Input *input = nullptr;
 	Audio *audio = nullptr;
 	GameScene *gameScene = nullptr;
+	PostEffect* postEffect = nullptr;
 	FbxManager *fbxManager = FbxManager::Create();
 
 	// ゲームウィンドウの作成
@@ -43,11 +45,16 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 		return 1;
 	}
 
-	// 3Dオブジェクト静的初期化
+	// ポストエフェクト用テクスチャの読み込み
+	Sprite::LoadTexture(100, L"Resources/white1x1.png");
 
+	// ポストエフェクトの初期化
+	postEffect = new PostEffect();
+	postEffect->Initialize();
+
+	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize( dxCommon->GetDevice() );
 
-	//
 	FbxLoader::GetInstance()->Initialize( dxCommon->GetDevice() );
 #pragma endregion
 
@@ -68,8 +75,12 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 
 		// 描画開始
 		dxCommon->PreDraw();
+
+		// ポストエフェクトの描画
+		postEffect->Draw(dxCommon->GetCommandList());
+
 		// ゲームシーンの描画
-		gameScene->Draw();
+		// gameScene->Draw();
 		// 描画終了
 		dxCommon->PostDraw();
 	}
@@ -78,6 +89,7 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 	safe_delete( audio );
 	safe_delete( input );
 	safe_delete( dxCommon );
+	delete postEffect;
 	FbxLoader::GetInstance()->Finalize();
 
 	// ゲームウィンドウの破棄
