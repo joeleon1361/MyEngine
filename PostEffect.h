@@ -22,10 +22,19 @@ public: // メンバ関数
 	// 初期化
 	void Initialize();
 
+	// パイプライン生成
+	void CreateGraphicsPipelineState();
+
 	// 描画コマンドの発行
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
 private: // メンバ変数
+	// ルートシグネチャ
+	ComPtr<ID3D12RootSignature> rootSignature;
+
+	// パイプラインステートオブジェクト
+	ComPtr<ID3D12PipelineState> pipelineState;
+
 	// テクスチャバッファ
 	ComPtr<ID3D12Resource> texBuff;
 

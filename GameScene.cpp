@@ -183,17 +183,17 @@ void GameScene::Draw()
 	ID3D12GraphicsCommandList* cmdList = dxCommon->GetCommandList();
 
 #pragma region 背景スプライト描画
-	// 背景スプライト描画前処理
-	Sprite::PreDraw(cmdList);
-	// 背景スプライト描画
-	spriteBG->Draw();
+	//// 背景スプライト描画前処理
+	//Sprite::PreDraw(cmdList);
+	//// 背景スプライト描画
+	//spriteBG->Draw();
 
-	// ここに背景スプライトの描画処理を追加できる
+	//// ここに背景スプライトの描画処理を追加できる
 
-	// スプライト描画後処理
-	Sprite::PostDraw();
-	// 深度バッファクリア
-	dxCommon->ClearDepthBuffer();
+	//// スプライト描画後処理
+	//Sprite::PostDraw();
+	//// 深度バッファクリア
+	//dxCommon->ClearDepthBuffer();
 #pragma endregion
 
 #pragma region 3Dオブジェクト描画
