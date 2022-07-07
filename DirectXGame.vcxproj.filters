@@ -62,6 +62,9 @@
     <Filter Include="3D\Particle">
       <UniqueIdentifier>{d0859231-da73-4f41-b495-2099a75c9b72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2D\PostEffect">
+      <UniqueIdentifier>{5ea10509-88da-4e4c-b601-356cb26734fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,7 +119,7 @@
       <Filter>3D\Particle</Filter>
     </ClCompile>
     <ClCompile Include="PostEffect.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>2D\PostEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +214,8 @@
     <ClInclude Include="ParticleManager.h">
       <Filter>3D\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="PostEffect.h" />
+    <ClInclude Include="PostEffect.h">
+      <Filter>2D\PostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

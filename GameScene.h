@@ -64,18 +64,14 @@ private: // メンバ変数
 
 	Model* modelSkydome = nullptr;
 	Model* modelGround = nullptr;
-	Model* modelFighter = nullptr;
+	Model* modelPlayer = nullptr;
 
-	FbxModel* fbxmodel1 = nullptr;
-	FbxModel* fbxmodel3 = nullptr;
 	FbxModel* testmodel = nullptr;
 
 	Object3d* objSkydome = nullptr;
 	Object3d* objGround = nullptr;
-	Object3d* objFighter = nullptr;
+	Object3d* objPlayer = nullptr;
 
-	FbxObject3d* fbxobject1 = nullptr;
-	FbxObject3d* fbxobject3 = nullptr;
 	FbxObject3d* testobject = nullptr;
 
 	const float g = -9.8 / 60.0f; // 重力加速度
