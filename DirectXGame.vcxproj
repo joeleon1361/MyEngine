@@ -121,7 +121,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)FBX;$(ProjectDir)OBJ;$(ProjectDir)Particle;$(ProjectDir)PostEffect;&amp;(ProjectDir)Sound;&amp;(ProjectDir)Input;&amp;(ProjectDir)Camera;&amp;(ProjectDir)Sprite;&amp;(ProjectDir)DebugText;&amp;(ProjectDir)EngineBase;&amp;(ProjectDir)GameScreen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)FBX;$(ProjectDir)OBJ;$(ProjectDir)Particle;$(ProjectDir)PostEffect;$(ProjectDir)Sound;$(ProjectDir)Input;$(ProjectDir)Camera;$(ProjectDir)Sprite;$(ProjectDir)DebugText;$(ProjectDir)EngineBase;$(ProjectDir)GameScreen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -138,7 +138,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)FBX;$(ProjectDir)OBJ;$(ProjectDir)Particle;$(ProjectDir)PostEffect;&amp;(ProjectDir)Sound;&amp;(ProjectDir)Input;&amp;(ProjectDir)Camera;&amp;(ProjectDir)Sprite;&amp;(ProjectDir)DebugText;&amp;(ProjectDir)EngineBase;&amp;(ProjectDir)GameScreen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)FBX;$(ProjectDir)OBJ;$(ProjectDir)Particle;$(ProjectDir)PostEffect;$(ProjectDir)Sound;$(ProjectDir)Input;$(ProjectDir)Camera;$(ProjectDir)Sprite;$(ProjectDir)DebugText;$(ProjectDir)EngineBase;$(ProjectDir)GameScreen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
