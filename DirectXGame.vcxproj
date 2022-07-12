@@ -121,6 +121,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)FBX;$(ProjectDir)OBJ;$(ProjectDir)Particle;$(ProjectDir)PostEffect;&amp;(ProjectDir)Sound;&amp;(ProjectDir)Input;&amp;(ProjectDir)Camera;&amp;(ProjectDir)Sprite;&amp;(ProjectDir)DebugText;&amp;(ProjectDir)EngineBase;&amp;(ProjectDir)GameScreen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -137,6 +138,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)FBX;$(ProjectDir)OBJ;$(ProjectDir)Particle;$(ProjectDir)PostEffect;&amp;(ProjectDir)Sound;&amp;(ProjectDir)Input;&amp;(ProjectDir)Camera;&amp;(ProjectDir)Sprite;&amp;(ProjectDir)DebugText;&amp;(ProjectDir)EngineBase;&amp;(ProjectDir)GameScreen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -147,24 +149,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="DebugText.cpp" />
-    <ClCompile Include="DirectXCommon.cpp" />
-    <ClCompile Include="FbxLoader.cpp" />
-    <ClCompile Include="FbxModel.cpp" />
-    <ClCompile Include="FbxObject3d.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Camera\Camera.cpp" />
+    <ClCompile Include="DebugText\DebugText.cpp" />
+    <ClCompile Include="EngineBase\DirectXCommon.cpp" />
+    <ClCompile Include="EngineBase\WinApp.cpp" />
+    <ClCompile Include="FBX\FbxLoader.cpp" />
+    <ClCompile Include="FBX\FbxModel.cpp" />
+    <ClCompile Include="FBX\FbxObject3d.cpp" />
+    <ClCompile Include="GameScreen\GameScene.cpp" />
+    <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Object3d.cpp" />
-    <ClCompile Include="ParticleManager.cpp" />
-    <ClCompile Include="PostEffect.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="WinApp.cpp" />
+    <ClCompile Include="OBJ\Material.cpp" />
+    <ClCompile Include="OBJ\Mesh.cpp" />
+    <ClCompile Include="OBJ\Model.cpp" />
+    <ClCompile Include="OBJ\Object3d.cpp" />
+    <ClCompile Include="Particle\ParticleManager.cpp" />
+    <ClCompile Include="PostEffect\PostEffect.cpp" />
+    <ClCompile Include="Sound\Audio.cpp" />
+    <ClCompile Include="Sprite\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli" />
@@ -229,23 +231,24 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="DebugText.h" />
-    <ClInclude Include="FbxLoader.h" />
-    <ClInclude Include="FbxModel.h" />
-    <ClInclude Include="FbxObject3d.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Material.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Object3d.h" />
-    <ClInclude Include="ParticleManager.h" />
-    <ClInclude Include="PostEffect.h" />
-    <ClInclude Include="SafeDelete.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="WinApp.h" />
+    <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="DebugText\DebugText.h" />
+    <ClInclude Include="EngineBase\DirectXCommon.h" />
+    <ClInclude Include="EngineBase\SafeDelete.h" />
+    <ClInclude Include="EngineBase\WinApp.h" />
+    <ClInclude Include="FBX\FbxLoader.h" />
+    <ClInclude Include="FBX\FbxModel.h" />
+    <ClInclude Include="FBX\FbxObject3d.h" />
+    <ClInclude Include="GameScreen\GameScene.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="OBJ\Material.h" />
+    <ClInclude Include="OBJ\Mesh.h" />
+    <ClInclude Include="OBJ\Model.h" />
+    <ClInclude Include="OBJ\Object3d.h" />
+    <ClInclude Include="Particle\ParticleManager.h" />
+    <ClInclude Include="PostEffect\PostEffect.h" />
+    <ClInclude Include="Sound\Audio.h" />
+    <ClInclude Include="Sprite\Sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -17,44 +17,14 @@
     <Filter Include="2D">
       <UniqueIdentifier>{5643292a-0e45-4efa-94aa-ec5cc0393947}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3D\Objファイル">
-      <UniqueIdentifier>{bf51be95-e1ae-4b59-97b2-bab82777df36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3D\Fbxファイル">
-      <UniqueIdentifier>{09439076-f7cf-408b-8f38-dc17b8616ac6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2D\Sprite">
       <UniqueIdentifier>{70d5a2d9-fe20-41ce-8b65-b4056398c1c1}</UniqueIdentifier>
     </Filter>
     <Filter Include="2D\DebugText">
       <UniqueIdentifier>{e3fbeecb-b914-4b67-9486-c82b6a9fc9ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Audio">
-      <UniqueIdentifier>{cd3791eb-8182-48b9-bb2e-fbfc9a3dfca4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{6bb8e23c-a0a8-43cd-82a8-356949ccb222}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3D\Objファイル\ObjModel">
-      <UniqueIdentifier>{b7108bf9-d94e-4714-b3f5-c551472ae236}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3D\Objファイル\ObjMesh">
-      <UniqueIdentifier>{f97afa36-e1da-473d-826b-41584715f47f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3D\Objファイル\ObjMaterial">
-      <UniqueIdentifier>{66deeb04-d331-47e2-9496-b26af53276f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3D\Objファイル\ObjObject">
-      <UniqueIdentifier>{8d4f662d-b328-4c2b-9f02-3b8d2f416882}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3D\Fbxファイル\FbxLoader">
-      <UniqueIdentifier>{a8ad0354-a10c-4a9d-9372-9160ef082fe1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3D\Fbxファイル\FbxModel">
-      <UniqueIdentifier>{3acfd19f-4e7a-4440-97fe-d3fe49f97134}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3D\Fbxファイル\FbxObject">
-      <UniqueIdentifier>{cfe713fc-ff28-4f73-9a15-65b6518fe75c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{fdc0cf07-70e7-4a36-a95f-07bd90c38eb5}</UniqueIdentifier>
@@ -65,61 +35,97 @@
     <Filter Include="2D\PostEffect">
       <UniqueIdentifier>{5ea10509-88da-4e4c-b601-356cb26734fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3D\OBJ">
+      <UniqueIdentifier>{bf51be95-e1ae-4b59-97b2-bab82777df36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\OBJ\ObjModel">
+      <UniqueIdentifier>{b7108bf9-d94e-4714-b3f5-c551472ae236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\OBJ\ObjMesh">
+      <UniqueIdentifier>{f97afa36-e1da-473d-826b-41584715f47f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\OBJ\ObjMaterial">
+      <UniqueIdentifier>{66deeb04-d331-47e2-9496-b26af53276f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\OBJ\ObjObject">
+      <UniqueIdentifier>{8d4f662d-b328-4c2b-9f02-3b8d2f416882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\FBX">
+      <UniqueIdentifier>{09439076-f7cf-408b-8f38-dc17b8616ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\FBX\FbxLoader">
+      <UniqueIdentifier>{a8ad0354-a10c-4a9d-9372-9160ef082fe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\FBX\FbxModel">
+      <UniqueIdentifier>{3acfd19f-4e7a-4440-97fe-d3fe49f97134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\FBX\FbxObject">
+      <UniqueIdentifier>{cfe713fc-ff28-4f73-9a15-65b6518fe75c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{cd3791eb-8182-48b9-bb2e-fbfc9a3dfca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineBase">
+      <UniqueIdentifier>{3daa5a77-8d23-4194-8e38-0a807118291f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScreen">
+      <UniqueIdentifier>{752d52de-1177-4280-9561-bcaf4bc070a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXCommon.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="FBX\FbxLoader.cpp">
+      <Filter>3D\FBX\FbxLoader</Filter>
     </ClCompile>
-    <ClCompile Include="WinApp.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="FBX\FbxModel.cpp">
+      <Filter>3D\FBX\FbxModel</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="FBX\FbxObject3d.cpp">
+      <Filter>3D\FBX\FbxObject</Filter>
     </ClCompile>
-    <ClCompile Include="FbxLoader.cpp">
-      <Filter>3D\Fbxファイル\FbxLoader</Filter>
+    <ClCompile Include="OBJ\Material.cpp">
+      <Filter>3D\OBJ\ObjMaterial</Filter>
     </ClCompile>
-    <ClCompile Include="FbxModel.cpp">
-      <Filter>3D\Fbxファイル\FbxModel</Filter>
+    <ClCompile Include="OBJ\Mesh.cpp">
+      <Filter>3D\OBJ\ObjMesh</Filter>
     </ClCompile>
-    <ClCompile Include="FbxObject3d.cpp">
-      <Filter>3D\Fbxファイル\FbxObject</Filter>
+    <ClCompile Include="OBJ\Model.cpp">
+      <Filter>3D\OBJ\ObjModel</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Camera</Filter>
+    <ClCompile Include="OBJ\Object3d.cpp">
+      <Filter>3D\OBJ\ObjObject</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Object3d.cpp">
-      <Filter>3D\Objファイル\ObjObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>3D\Objファイル\ObjMaterial</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugText.cpp">
-      <Filter>2D\DebugText</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>2D\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>3D\Objファイル\ObjMesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>3D\Objファイル\ObjModel</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleManager.cpp">
+    <ClCompile Include="Particle\ParticleManager.cpp">
       <Filter>3D\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="PostEffect.cpp">
+    <ClCompile Include="PostEffect\PostEffect.cpp">
       <Filter>2D\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\Audio.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugText\DebugText.cpp">
+      <Filter>2D\DebugText</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite\Sprite.cpp">
+      <Filter>2D\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineBase\DirectXCommon.cpp">
+      <Filter>EngineBase</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineBase\WinApp.cpp">
+      <Filter>EngineBase</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreen\GameScene.cpp">
+      <Filter>GameScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,56 +172,59 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SafeDelete.h">
-      <Filter>ヘッダ ファイル</Filter>
+    <ClInclude Include="FBX\FbxLoader.h">
+      <Filter>3D\FBX\FbxLoader</Filter>
     </ClInclude>
-    <ClInclude Include="WinApp.h">
-      <Filter>ヘッダ ファイル</Filter>
+    <ClInclude Include="FBX\FbxModel.h">
+      <Filter>3D\FBX\FbxModel</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>ヘッダ ファイル</Filter>
+    <ClInclude Include="FBX\FbxObject3d.h">
+      <Filter>3D\FBX\FbxObject</Filter>
     </ClInclude>
-    <ClInclude Include="FbxLoader.h">
-      <Filter>3D\Fbxファイル\FbxLoader</Filter>
+    <ClInclude Include="OBJ\Material.h">
+      <Filter>3D\OBJ\ObjMaterial</Filter>
     </ClInclude>
-    <ClInclude Include="FbxModel.h">
-      <Filter>3D\Fbxファイル\FbxModel</Filter>
+    <ClInclude Include="OBJ\Mesh.h">
+      <Filter>3D\OBJ\ObjMesh</Filter>
     </ClInclude>
-    <ClInclude Include="FbxObject3d.h">
-      <Filter>3D\Fbxファイル\FbxObject</Filter>
+    <ClInclude Include="OBJ\Model.h">
+      <Filter>3D\OBJ\ObjModel</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Camera</Filter>
+    <ClInclude Include="OBJ\Object3d.h">
+      <Filter>3D\OBJ\ObjObject</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Object3d.h">
-      <Filter>3D\Objファイル\ObjObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>3D\Objファイル\ObjMaterial</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugText.h">
-      <Filter>2D\DebugText</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>2D\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>3D\Objファイル\ObjMesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>3D\Objファイル\ObjModel</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleManager.h">
+    <ClInclude Include="Particle\ParticleManager.h">
       <Filter>3D\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="PostEffect.h">
+    <ClInclude Include="PostEffect\PostEffect.h">
       <Filter>2D\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\Audio.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugText\DebugText.h">
+      <Filter>2D\DebugText</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite\Sprite.h">
+      <Filter>2D\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineBase\DirectXCommon.h">
+      <Filter>EngineBase</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineBase\SafeDelete.h">
+      <Filter>EngineBase</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineBase\WinApp.h">
+      <Filter>EngineBase</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreen\GameScene.h">
+      <Filter>GameScreen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
