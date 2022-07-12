@@ -174,8 +174,8 @@ void GameScene::Draw()
 	Object3d::PreDraw(cmdList);
 
 	// 3Dオブクジェクトの描画
-	/* objSkydome->Draw();
-	 objGround->Draw();*/
+	objSkydome->Draw();
+	// objGround->Draw();
 	objPlayer->Draw();
 
 	// testobject->Draw(cmdList);
