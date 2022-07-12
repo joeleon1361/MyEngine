@@ -1,4 +1,4 @@
-#include "FbxObject3d.h"
+#include "FbxObject.h"
 #include "FbxLoader.h"
 
 #include<d3dcompiler.h>

@@ -1,10 +1,10 @@
-﻿#include "GameScene.h"
-#include "Model.h"
+﻿#include "GameScreen.h"
+#include "ObjModel.h"
 #include <cassert>
 #include <sstream>
 #include <iomanip>
 #include"FbxLoader.h"
-#include"FbxObject3d.h"
+#include"FbxObject.h"
 #include"Camera.h"
 #include <stdio.h>
 

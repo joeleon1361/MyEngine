@@ -155,17 +155,17 @@
     <ClCompile Include="EngineBase\WinApp.cpp" />
     <ClCompile Include="FBX\FbxLoader.cpp" />
     <ClCompile Include="FBX\FbxModel.cpp" />
-    <ClCompile Include="FBX\FbxObject3d.cpp" />
-    <ClCompile Include="GameScreen\GameScene.cpp" />
+    <ClCompile Include="FBX\FbxObject.cpp" />
+    <ClCompile Include="GameScreen\GameScreen.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="OBJ\Material.cpp" />
-    <ClCompile Include="OBJ\Mesh.cpp" />
-    <ClCompile Include="OBJ\Model.cpp" />
-    <ClCompile Include="OBJ\Object3d.cpp" />
+    <ClCompile Include="OBJ\ObjMaterial.cpp" />
+    <ClCompile Include="OBJ\ObjMesh.cpp" />
+    <ClCompile Include="OBJ\ObjModel.cpp" />
+    <ClCompile Include="OBJ\ObjObject.cpp" />
     <ClCompile Include="Particle\ParticleManager.cpp" />
     <ClCompile Include="PostEffect\PostEffect.cpp" />
-    <ClCompile Include="Sound\Audio.cpp" />
+    <ClCompile Include="Sound\Sound.cpp" />
     <ClCompile Include="Sprite\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -251,16 +251,16 @@
     <ClInclude Include="EngineBase\WinApp.h" />
     <ClInclude Include="FBX\FbxLoader.h" />
     <ClInclude Include="FBX\FbxModel.h" />
-    <ClInclude Include="FBX\FbxObject3d.h" />
-    <ClInclude Include="GameScreen\GameScene.h" />
+    <ClInclude Include="FBX\FbxObject.h" />
+    <ClInclude Include="GameScreen\GameScreen.h" />
     <ClInclude Include="Input\Input.h" />
-    <ClInclude Include="OBJ\Material.h" />
-    <ClInclude Include="OBJ\Mesh.h" />
-    <ClInclude Include="OBJ\Model.h" />
-    <ClInclude Include="OBJ\Object3d.h" />
+    <ClInclude Include="OBJ\ObjMaterial.h" />
+    <ClInclude Include="OBJ\ObjMesh.h" />
+    <ClInclude Include="OBJ\ObjModel.h" />
+    <ClInclude Include="OBJ\ObjObject.h" />
     <ClInclude Include="Particle\ParticleManager.h" />
     <ClInclude Include="PostEffect\PostEffect.h" />
-    <ClInclude Include="Sound\Audio.h" />
+    <ClInclude Include="Sound\Sound.h" />
     <ClInclude Include="Sprite\Sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

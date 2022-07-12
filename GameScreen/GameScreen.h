@@ -5,10 +5,10 @@
 #include <DirectXMath.h>
 #include "Input.h"
 #include "Sprite.h"
-#include "Object3d.h"
+#include "ObjObject.h"
 #include "DebugText.h"
-#include "Audio.h"
-#include "FbxObject3d.h"
+#include "Sound.h"
+#include "FbxObject.h"
 #include "ParticleManager.h"
 
 // ゲームシーン
