@@ -85,9 +85,6 @@
     <ClCompile Include="FBX\FbxObject3d.cpp">
       <Filter>3D\FBX\FbxObject</Filter>
     </ClCompile>
-    <ClCompile Include="OBJ\Material.cpp">
-      <Filter>3D\OBJ\ObjMaterial</Filter>
-    </ClCompile>
     <ClCompile Include="OBJ\Mesh.cpp">
       <Filter>3D\OBJ\ObjMesh</Filter>
     </ClCompile>
@@ -127,6 +124,9 @@
     <ClCompile Include="GameScreen\GameScene.cpp">
       <Filter>GameScreen</Filter>
     </ClCompile>
+    <ClCompile Include="OBJ\Material.cpp">
+      <Filter>3D\OBJ\ObjMaterial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -135,10 +135,13 @@
     <None Include="Resources\shaders\Particle.hlsli">
       <Filter>シェーダ ファイル</Filter>
     </None>
-    <None Include="Resources\shaders\SpriteShaderHeader.hlsli">
+    <None Include="Resources\shaders\Sprite.hlsli">
       <Filter>シェーダ ファイル</Filter>
     </None>
-    <None Include="Resources\shaders\PostEffectTest.hlsli">
+    <None Include="Resources\shaders\PostEffect.hlsli">
+      <Filter>シェーダ ファイル</Filter>
+    </None>
+    <None Include="Resources\Shaders\OBJ.hlsli">
       <Filter>シェーダ ファイル</Filter>
     </None>
   </ItemGroup>
@@ -158,16 +161,22 @@
     <FxCompile Include="Resources\shaders\ParticleVS.hlsl">
       <Filter>シェーダ ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\SpritePixelShader.hlsl">
+    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
       <Filter>シェーダ ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\SpriteVertexShader.hlsl">
+    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
       <Filter>シェーダ ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PostEffectTestPS.hlsl">
+    <FxCompile Include="Resources\shaders\PostEffectPS.hlsl">
       <Filter>シェーダ ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PostEffectTestVS.hlsl">
+    <FxCompile Include="Resources\shaders\PostEffectVS.hlsl">
+      <Filter>シェーダ ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\OBJPS.hlsl">
+      <Filter>シェーダ ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\OBJVS.hlsl">
       <Filter>シェーダ ファイル</Filter>
     </FxCompile>
   </ItemGroup>
@@ -180,9 +189,6 @@
     </ClInclude>
     <ClInclude Include="FBX\FbxObject3d.h">
       <Filter>3D\FBX\FbxObject</Filter>
-    </ClInclude>
-    <ClInclude Include="OBJ\Material.h">
-      <Filter>3D\OBJ\ObjMaterial</Filter>
     </ClInclude>
     <ClInclude Include="OBJ\Mesh.h">
       <Filter>3D\OBJ\ObjMesh</Filter>
@@ -225,6 +231,9 @@
     </ClInclude>
     <ClInclude Include="GameScreen\GameScene.h">
       <Filter>GameScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJ\Material.h">
+      <Filter>3D\OBJ\ObjMaterial</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
