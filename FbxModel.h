@@ -89,6 +89,25 @@ public:
 		}
 	};
 
+	// 定数バッファ用データ構造体(マテリアル)
+	struct ConstBufferDataMaterial
+	{
+		// アルベド
+		DirectX::XMFLOAT3 baseColor;
+
+		// 金属度
+		float metalness;
+
+		// 鏡面反射強度
+		float specular;
+
+		// 粗さ
+		float roughness;
+
+		// パディング
+		float pad[2];
+	};
+
 public:
 	// 描画
 	void Draw( ID3D12GraphicsCommandList *cmdList );
@@ -144,6 +163,9 @@ private: // メンバ変数
 
 	// 粗さ
 	float roughness = 0.0f;
+
+	// 定数バッファ(マテリアル)
+	ComPtr<ID3D12Resource> constBuffMaterial;
 
 public:
 	// バッファ生成

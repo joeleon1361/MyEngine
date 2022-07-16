@@ -16,6 +16,9 @@ void FbxModel::Draw( ID3D12GraphicsCommandList *cmdList )
 	// シェーダリソースビューをセット
 	cmdList->SetGraphicsRootDescriptorTable( 1, descHeapSRV->GetGPUDescriptorHandleForHeapStart() );
 
+	// 定数バッファビューをセット
+	cmdList->SetGraphicsRootConstantBufferView(3, constBuffMaterial->GetGPUVirtualAddress());
+
 	// 描画コマンド
 	cmdList->DrawIndexedInstanced( (UINT)indices.size(), 1, 0, 0, 0 );
 }
@@ -157,4 +160,25 @@ void FbxModel::CreatBuffers( ID3D12Device *device )
 		descHeapSRV->GetCPUDescriptorHandleForHeapStart() // ヒープの先頭アドレス
 	);
 #pragma endregion
+
+	// 定数バッファ生成
+	result = device->CreateCommittedResource(
+		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
+		D3D12_HEAP_FLAG_NONE,
+		&CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferDataMaterial) + 0xff) & ~0xff),
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&constBuffMaterial));
+
+	// 定数バッファへデータ転送
+	ConstBufferDataMaterial* constMapMaterial = nullptr;
+	result = constBuffMaterial->Map(0, nullptr,
+		(void**)&constMapMaterial);
+	if (SUCCEEDED(result)) {
+		constMapMaterial->baseColor = baseColor;
+		constMapMaterial->metalness = metalness;
+		constMapMaterial->specular = specular;
+		constMapMaterial->roughness = roughness;
+		constBuffMaterial->Unmap(0, nullptr);
+	}
 }

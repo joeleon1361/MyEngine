@@ -28,3 +28,19 @@ cbuffer skinning:register(b3) // ボーンのスキニング行列が入る
 {
 	matrix matSkinning[MAX_BONES];
 }
+
+// マテリアル
+cbuffer cbuff1 : register(b1)
+{
+	// アルベド
+	float3 baseColor;
+
+	// 金属度
+	float metalness;
+
+	// 鏡面反射強度
+	float specular;
+
+	// 粗さ
+	float roughness;
+}
