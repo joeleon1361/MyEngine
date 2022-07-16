@@ -313,43 +313,79 @@ void FbxLoader::ParseMaterial( FbxModel *fbxmodel, FbxNode *fbxNode )
 
         if ( material )
         {
-            // FbxSurfaceLambertクラスかどうかを調べる
-            if ( material->GetClassId().Is( FbxSurfaceLambert::ClassId ) )
-            {
-                FbxSurfaceLambert *lambert = static_cast<FbxSurfaceLambert *>(material);
+            //// FbxSurfaceLambertクラスかどうかを調べる
+            //if ( material->GetClassId().Is( FbxSurfaceLambert::ClassId ) )
+            //{
+            //    FbxSurfaceLambert *lambert = static_cast<FbxSurfaceLambert *>(material);
 
-                // 環境光係数
-                FbxPropertyT<FbxDouble3> ambient = lambert->Ambient;
-                fbxmodel->ambient.x = (float)ambient.Get()[0];
-                fbxmodel->ambient.y = (float)ambient.Get()[1];
-                fbxmodel->ambient.z = (float)ambient.Get()[2];
+            //    // 環境光係数
+            //    FbxPropertyT<FbxDouble3> ambient = lambert->Ambient;
+            //    fbxmodel->ambient.x = (float)ambient.Get()[0];
+            //    fbxmodel->ambient.y = (float)ambient.Get()[1];
+            //    fbxmodel->ambient.z = (float)ambient.Get()[2];
 
-                // 拡散反射光係数
-                FbxPropertyT<FbxDouble3> diffuse = lambert->Diffuse;
-                fbxmodel->diffuse.x = (float)diffuse.Get()[0];
-                fbxmodel->diffuse.y = (float)diffuse.Get()[1];
-                fbxmodel->diffuse.z = (float)diffuse.Get()[2];
+            //    // 拡散反射光係数
+            //    FbxPropertyT<FbxDouble3> diffuse = lambert->Diffuse;
+            //    fbxmodel->diffuse.x = (float)diffuse.Get()[0];
+            //    fbxmodel->diffuse.y = (float)diffuse.Get()[1];
+            //    fbxmodel->diffuse.z = (float)diffuse.Get()[2];
+            //}
+
+            //// ディフューズテクスチャを取り出す
+            //const FbxProperty diffuseProperty = material->FindProperty( FbxSurfaceMaterial::sDiffuse );
+            //if ( diffuseProperty.IsValid() )
+            //{
+            //    const FbxFileTexture *texture = diffuseProperty.GetSrcObject<FbxFileTexture>();
+            //    if ( texture )
+            //    {
+            //        const char *filepath = texture->GetFileName();
+
+            //        // ファイルパスからファイル名抽出
+            //        string path_str( filepath );
+            //        string name = ExtractFileName( path_str );
+
+            //        // テクスチャ読み込み
+            //        LoadTexture( fbxmodel, baseDirectory + fbxmodel->name + "/" + name );
+            //        textureLoaded = true;
+            //    }
+            //}
+
+            // マテリアル名(デバック用)
+            string name = material->GetName();
+
+            // ベースカラー
+            const FbxProperty proBaseColor =
+                FbxSurfaceMaterialUtils::GetProperty("baseColor", material);
+            if (proBaseColor.IsValid()) {
+                // FbxDouble3としてプロパティの値を読み取り
+                FbxDouble3 baseColor = proBaseColor.Get<FbxDouble3>();
+
+                // モデルに読み取った値を書き込む
+                fbxmodel->baseColor.x = (float)baseColor.Buffer()[0];
+                fbxmodel->baseColor.y = (float)baseColor.Buffer()[1];
+                fbxmodel->baseColor.z = (float)baseColor.Buffer()[2];
             }
 
-            // ディフューズテクスチャを取り出す
-            const FbxProperty diffuseProperty = material->FindProperty( FbxSurfaceMaterial::sDiffuse );
-            if ( diffuseProperty.IsValid() )
-            {
-                const FbxFileTexture *texture = diffuseProperty.GetSrcObject<FbxFileTexture>();
-                if ( texture )
-                {
-                    const char *filepath = texture->GetFileName();
-
-                    // ファイルパスからファイル名抽出
-                    string path_str( filepath );
-                    string name = ExtractFileName( path_str );
-
-                    // テクスチャ読み込み
-                    LoadTexture( fbxmodel, baseDirectory + fbxmodel->name + "/" + name );
-                    textureLoaded = true;
-                }
+            // 金属度
+            const FbxProperty propMetalness = FbxSurfaceMaterialUtils::GetProperty("metalness", material);
+            if (propMetalness.IsValid()) {
+                // モデルに読み取った値を書き込む
+                fbxmodel->metalness = propMetalness.Get<float>();
             }
 
+            // 隙間
+            const FbxProperty propSpecular = FbxSurfaceMaterialUtils::GetProperty("specular", material);
+            if (propSpecular.IsValid()) {
+                // モデルに読み取った値を書き込む
+                fbxmodel->specular = propSpecular.Get<float>();
+            }
+
+            // 粗さ
+            const FbxProperty propSpecularRoughness = FbxSurfaceMaterialUtils::GetProperty("specularRoughness", material);
+            if (propSpecularRoughness.IsValid()) {
+                // モデルに読み取った値を書き込む
+                fbxmodel->roughness = propSpecularRoughness.Get<float>();
+            }
         }
 
         // テクスチャがない場合は白テクスチャを貼る
