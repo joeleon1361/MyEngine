@@ -16,6 +16,27 @@ float SchlickFresnel(float f0, float f90, float cosine)
 	return lerp(f0, f90, m5);
 }
 
+float3 SchlickFresnel3(float3 f0, float3 f90, float cosine)
+{
+	float m = saturate(1 - cosine);
+	float m2 = m * m;
+	float m5 = m2 * m2 * m;
+	return lerp(f0, f90, m5);
+}
+
+float3 DisneyFresnel(float LdotH)
+{
+	float luminance = 0.3f * baseColor.r + 0.6f * baseColor.g + 0.1f * baseColor.b;
+
+	float3 tintColor = baseColor / luminance;
+
+	float3 nonMetalColor = specular * 0.08f * tintColor;
+
+	float3 specularColor = lerp(nonMetalColor, baseColor, metalness);
+
+	return SchlickFresnel3(specularColor, float3(1, 1, 1), LdotH);
+}
+
 float DistributionGGX(float alpha, float NdotH)
 {
 	float alpha2 = alpha * alpha;
@@ -27,9 +48,9 @@ float3 CookTorranceSpecular(float NdotL, float NdotV, float NdotH, float LdotH)
 {
 	float Ds = DistributionGGX(roughness * roughness, NdotH);
 
-	float3 Fs = float3(1, 1, 1);
+	float3 Fs = DisneyFresnel(LdotH);
 
-	float Gs = 0.1f;
+	float Gs = 1.0f;
 
 	float m = 4.0f * NdotL * NdotV;
 

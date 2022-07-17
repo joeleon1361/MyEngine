@@ -100,7 +100,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objGround->SetModel(modelGround);
 	objFighter->SetModel(modelFighter);
 
-	testmodel = FbxLoader::GetInstance()->LoadModelFromFile("spherePBR");
+	testmodel = FbxLoader::GetInstance()->LoadModelFromFile("SpiralPBR");
 
 
 	// FBX3Dオブジェクト生成とモデルとセット
