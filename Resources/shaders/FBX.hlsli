@@ -44,3 +44,45 @@ cbuffer cbuff1 : register(b1)
 	// 粗さ
 	float roughness;
 }
+
+// 平行光源の数
+static const int DIRLIGHT_NUM = 3;
+
+struct DirLight
+{
+	float3 lightv;
+	float3 lightcolor;
+	uint active;
+};
+
+// 点光源の数
+static const int POINTLIGHT_NUM = 3;
+
+struct PointLight
+{
+	float3 lightpos;
+	float3 lightcolor;
+	float3 lightatten;
+	uint active;
+};
+
+// スポットライトの数
+static const int SPOTLIGHT_NUM = 3;
+
+struct SpotLight
+{
+	float3 lightv;
+	float3 lightpos;
+	float3 lightcolor;
+	float3 lightatten;
+	float2 lightfactoranglecos;
+	uint active;
+};
+
+cbuffer cbuff2 : register(b2)
+{
+	float3	ambientLightColor;
+	DirLight dirLights[DIRLIGHT_NUM];
+	PointLight pointLights[POINTLIGHT_NUM];
+	SpotLight spotLight[SPOTLIGHT_NUM];
+}

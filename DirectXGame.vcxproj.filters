@@ -118,6 +118,9 @@
     <ClCompile Include="PostEffect.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="LightGroup.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -212,5 +215,10 @@
       <Filter>3D\Particle</Filter>
     </ClInclude>
     <ClInclude Include="PostEffect.h" />
+    <ClInclude Include="CircleShadow.h" />
+    <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="LightGroup.h" />
+    <ClInclude Include="PointLight.h" />
+    <ClInclude Include="SpotLight.h" />
   </ItemGroup>
 </Project>

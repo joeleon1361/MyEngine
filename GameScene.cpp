@@ -41,12 +41,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	// カメラ生成
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
-
+	lightGroup = LightGroup::Create();
 
 	// カメラセット
 	Object3d::SetCamera(camera);
 	FbxObject3d::SetCamera(camera);
-
 
 	// デバイスをセット
 	FbxObject3d::SetDevice(dxCommon->GetDevice());
@@ -54,6 +53,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// グラフィックスパイプライン生成
 	FbxObject3d::CreateGraphicsPipeline();
 
+	// ライトグループをセット
+	FbxObject3d::SetLightGroup(lightGroup);
+
+	lightGroup = LightGroup::Create();
 
 	// デバッグテキスト用テクスチャ読み込み
 	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
@@ -110,6 +113,7 @@ void GameScene::Update()
 
 	camera->Update();
 	particleMan->Update();
+	lightGroup->Update();
 
 	objSkydome->Update();
 	objGround->Update();

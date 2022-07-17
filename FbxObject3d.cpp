@@ -9,6 +9,7 @@ using namespace DirectX;
 
 ID3D12Device* FbxObject3d::device = nullptr;
 Camera* FbxObject3d::camera = nullptr;
+LightGroup* FbxObject3d::lightGroup = nullptr;
 
 ComPtr<ID3D12RootSignature> FbxObject3d::rootSignature;
 ComPtr<ID3D12PipelineState> FbxObject3d::pipelineState;
@@ -320,6 +321,8 @@ void FbxObject3d::Draw(ID3D12GraphicsCommandList* cmdList)
 	cmdList->SetGraphicsRootConstantBufferView(0, constBuffTransform->GetGPUVirtualAddress());
 	// スキニング情報定数バッファビューをセット
 	cmdList->SetGraphicsRootConstantBufferView(2, constBuffSkin->GetGPUVirtualAddress());
+	// ライトのグラフィックスコマンド
+	lightGroup->Draw(cmdList, 4);
 
 	// モデル描画
 	fbxmodel->Draw(cmdList);

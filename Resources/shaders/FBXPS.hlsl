@@ -12,5 +12,5 @@ struct PSOutput
 
 float4 main(VSOutput input) : SV_TARGET
 {
-	return float4(baseColor, 1);
+	return float4(ambientLightColor, 1);
 }

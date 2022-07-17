@@ -9,6 +9,7 @@
 
 #include "FbxModel.h"
 #include "Camera.h"
+#include "LightGroup.h"
 
 class FbxObject3d
 {
@@ -43,19 +44,21 @@ public: // サブクラス
 
 public: // 静的メンバ関数
 // setter
-	static void SetDevice( ID3D12Device *device ) { FbxObject3d::device = device; }
-	static void SetCamera( Camera *camera ) { FbxObject3d::camera = camera; }
-
+	static void SetDevice(ID3D12Device* device) { FbxObject3d::device = device; }
+	static void SetCamera(Camera* camera) { FbxObject3d::camera = camera; }
+	static void SetLightGroup(LightGroup* lightGroup) { FbxObject3d::lightGroup = lightGroup; }
 	/// <summary>
 	/// グラフィックパイプラインの生成
 	/// </summary>
 	static void CreateGraphicsPipeline();
 
+
+
 private: // 静的メンバ変数
-	static ID3D12Device *device;
+	static ID3D12Device* device;
 
 	// カメラ
-	static Camera *camera;
+	static Camera* camera;
 
 	// ルートシグネチャ
 	static ComPtr<ID3D12RootSignature> rootSignature;
@@ -65,30 +68,32 @@ private: // 静的メンバ変数
 	// 定数バッファ(スキン)
 	ComPtr<ID3D12Resource> constBuffSkin;
 
+	static LightGroup* lightGroup;
+
 public: // メンバ関数
 	// 初期化
 	void Initialize();
 
 	// 毎フレーム処理
 	void Update();
-	
-	// モデルのセット
-	void SetModel( FbxModel *fbxmodel ) { this->fbxmodel = fbxmodel; }
-	
-	// 描画
-	void Draw( ID3D12GraphicsCommandList *cmdList );
-	
-	// 座標の取得
-	const XMFLOAT3 &GetPosition() { return position; }
-	
-	// 座標の設定
-	void SetPosition( XMFLOAT3 position ) { this->position = position; }
 
-	void SetRotation( XMFLOAT3 rotation ) { this->rotation = rotation; }
-	
+	// モデルのセット
+	void SetModel(FbxModel* fbxmodel) { this->fbxmodel = fbxmodel; }
+
+	// 描画
+	void Draw(ID3D12GraphicsCommandList* cmdList);
+
+	// 座標の取得
+	const XMFLOAT3& GetPosition() { return position; }
+
+	// 座標の設定
+	void SetPosition(XMFLOAT3 position) { this->position = position; }
+
+	void SetRotation(XMFLOAT3 rotation) { this->rotation = rotation; }
+
 	// スケールの設定
-	void SetScale( XMFLOAT3 scale ) { this->scale = scale; }
-	
+	void SetScale(XMFLOAT3 scale) { this->scale = scale; }
+
 	// アニメーション開始
 	void PlayAnimation();
 
@@ -105,7 +110,7 @@ protected: // メンバ変数
 	// ローカルワールド変換行列
 	XMMATRIX matWorld;
 	// モデル
-	FbxModel *fbxmodel = nullptr;
+	FbxModel* fbxmodel = nullptr;
 
 	// 1フレーム
 	FbxTime frameTime;

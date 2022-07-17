@@ -10,6 +10,7 @@
 #include "Audio.h"
 #include "FbxObject3d.h"
 #include "ParticleManager.h"
+#include "LightGroup.h"
 
 // ゲームシーン
 class GameScene
@@ -57,6 +58,7 @@ private: // メンバ変数
 
 	// ゲームシーン用
 	Camera* camera = nullptr;
+	LightGroup* lightGroup = nullptr;
 
 	Sprite* spriteBG = nullptr;
 

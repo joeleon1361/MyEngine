@@ -5,6 +5,7 @@
 #include "fbxsdk.h"
 #include "PostEffect.h"
 #include "FbxLoader.h"
+#include "LightGroup.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
@@ -56,6 +57,9 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 	Object3d::StaticInitialize( dxCommon->GetDevice() );
 
 	FbxLoader::GetInstance()->Initialize( dxCommon->GetDevice() );
+
+	// ライト静的初期化
+	LightGroup::StaticInitialize(dxCommon->GetDevice());
 #pragma endregion
 
 	// ゲームシーンの初期化
