@@ -58,6 +58,8 @@ VSOutput main( VSInput input )
 
 	output.svpos = mul( mul( viewproj, world ), skinned.pos );
 
+	output.worldpos = mul(world, input.pos).xyz;
+
 	output.normal = wnormal.xyz;
 
 	output.uv = input.uv;

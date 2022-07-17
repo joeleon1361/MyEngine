@@ -8,7 +8,14 @@
 #include"Camera.h"
 #include <stdio.h>
 
+
+
 using namespace DirectX;
+
+static float baseColor[3];
+static float metalness;
+static float specular;
+static float roughness;
 
 GameScene::GameScene()
 {
@@ -95,13 +102,24 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	testmodel = FbxLoader::GetInstance()->LoadModelFromFile("spherePBR");
 
+
 	// FBX3Dオブジェクト生成とモデルとセット
 	testobject = new FbxObject3d;
 	testobject->Initialize();
 	testobject->SetModel(testmodel);
 
+	// マテリアルパラメータの初期値を取得
+	baseColor[0] = testmodel->GetBaseColor().x;
+	baseColor[1] = testmodel->GetBaseColor().y;
+	baseColor[2] = testmodel->GetBaseColor().z;
+	metalness = testmodel->GetMetalness();
+	specular = testmodel->GetSpecular();
+	roughness = testmodel->GetRoughness();
+
 	// 座標のセット
 	testobject->SetRotation({ 0, 90, 0 });
+
+
 }
 
 void GameScene::Update()
@@ -114,6 +132,12 @@ void GameScene::Update()
 	camera->Update();
 	particleMan->Update();
 	lightGroup->Update();
+
+	testmodel->SetBaseColor(XMFLOAT3(baseColor));
+	testmodel->SetMetalness(metalness);
+	testmodel->SetSpecular(specular);
+	testmodel->SetRoughness(roughness);
+	testmodel->TransferMaterial();
 
 	objSkydome->Update();
 	objGround->Update();
@@ -182,6 +206,15 @@ void GameScene::Draw()
 	// スプライト描画後処理
 	Sprite::PostDraw();
 #pragma endregion
+
+	ImGui::Begin("Material");
+	ImGui::SetWindowPos(ImVec2(0, 0));
+	ImGui::SetWindowSize(ImVec2(300, 130));
+	ImGui::ColorEdit3("baseColor", baseColor, ImGuiColorEditFlags_Float);
+	ImGui::SliderFloat("metalness", &metalness, 0, 1);
+	ImGui::SliderFloat("specular", &specular, 0, 1);
+	ImGui::SliderFloat("roughness", &roughness, 0, 1);
+	ImGui::End();
 }
 
 void GameScene::MoveCamera()

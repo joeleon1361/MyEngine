@@ -2,6 +2,8 @@
 #include <vector>
 #include <cassert>
 #include "SafeDelete.h"
+#include <imgui_impl_win32.h>
+#include <imgui_impl_dx12.h>
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -45,6 +47,10 @@ void DirectXCommon::Initialize(WinApp* winApp)
 	if (!CreateFence()) {
 		assert(0);
 	}
+
+	if (!InitImgui()) {
+		assert(0);
+	}
 }
 
 void DirectXCommon::PreDraw()
@@ -71,10 +77,41 @@ void DirectXCommon::PreDraw()
 	commandList->RSSetViewports(1, &CD3DX12_VIEWPORT(0.0f, 0.0f, WinApp::window_width, WinApp::window_height));
 	// シザリング矩形の設定
 	commandList->RSSetScissorRects(1, &CD3DX12_RECT(0, 0, WinApp::window_width, WinApp::window_height));
+
+	// imgui開始
+	ImGui_ImplDX12_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+	// 経過時間計測
+	auto now = std::chrono::steady_clock::now();
+	deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - lastUpdate).count() / 1000000.0f;
+	frameRate = 1.0f / deltaTime;
+	lastUpdate = now;
+
+	// FPS,CPU使用率表示
+	{
+		static int count = 0;
+		const float FPS_BASIS = 60.0f;
+		// 一秒に一度更新
+		if (++count > FPS_BASIS) {
+			count = 0;
+			float cputime = deltaTime - commandWaitTime;
+			char str[50];
+			sprintf_s(str, 50, "fps=%03.0f cpu usage=%06.2f%%", frameRate, cputime * FPS_BASIS * 100.0f);
+			SetWindowTextA(winApp->GetHwnd(), str);
+		}
+	}
 }
 
 void DirectXCommon::PostDraw()
 {
+	// imgui描画
+	ImGui::Render();
+	ID3D12DescriptorHeap* ppHeaps[] = { imguiHeap.Get() };
+	commandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), commandList.Get());
+
 	// リソースバリアを変更（描画対象→表示状態）
 	UINT bbIndex = swapchain->GetCurrentBackBufferIndex();
 	commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(backBuffers[bbIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
@@ -86,6 +123,8 @@ void DirectXCommon::PostDraw()
 	ID3D12CommandList* cmdLists[] = { commandList.Get() }; // コマンドリストの配列
 	commandQueue->ExecuteCommandLists(1, cmdLists);
 
+	auto timePreCommand = std::chrono::steady_clock::now();
+
 	// コマンドリストの実行完了を待つ
 	commandQueue->Signal(fence.Get(), ++fenceVal);
 	if (fence->GetCompletedValue() != fenceVal) {
@@ -94,6 +133,10 @@ void DirectXCommon::PostDraw()
 		WaitForSingleObject(event, INFINITE);
 		CloseHandle(event);
 	}
+
+	// コマンドリスト実行完了待ち後の時間
+	auto timePostCommand = std::chrono::steady_clock::now();
+	commandWaitTime = std::chrono::duration_cast<std::chrono::microseconds>(timePostCommand - timePreCommand).count() / 1000000.0f;
 
 	commandAllocator->Reset(); // キューをクリア
 	commandList->Reset(commandAllocator.Get(), nullptr);	// 再びコマンドリストを貯める準備
@@ -364,6 +407,52 @@ bool DirectXCommon::CreateFence()
 	// フェンスの生成
 	result = device->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 	if (FAILED(result)) {
+		assert(0);
+		return false;
+	}
+
+	return true;
+}
+
+bool DirectXCommon::InitImgui()
+{
+	HRESULT result = S_FALSE;
+
+	// デスクリプタヒープを生成
+	D3D12_DESCRIPTOR_HEAP_DESC heapDesc{};
+	heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+	heapDesc.NumDescriptors = 1;
+	heapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+	result = device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&imguiHeap));
+	if (FAILED(result)) {
+		assert(0);
+		return false;
+	}
+
+	// スワップチェーンの情報を取得
+	DXGI_SWAP_CHAIN_DESC swcDesc = {};
+	result = swapchain->GetDesc(&swcDesc);
+	if (FAILED(result)) {
+		assert(0);
+		return false;
+	}
+
+	if (ImGui::CreateContext() == nullptr) {
+		assert(0);
+		return false;
+	}
+	if (!ImGui_ImplWin32_Init(winApp->GetHwnd())) {
+		assert(0);
+		return false;
+	}
+	if (!ImGui_ImplDX12_Init(
+		GetDevice(),
+		swcDesc.BufferCount,
+		swcDesc.BufferDesc.Format,
+		imguiHeap.Get(),
+		imguiHeap->GetCPUDescriptorHandleForHeapStart(),
+		imguiHeap->GetGPUDescriptorHandleForHeapStart()
+	)) {
 		assert(0);
 		return false;
 	}

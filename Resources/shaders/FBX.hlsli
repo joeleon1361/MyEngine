@@ -17,6 +17,7 @@ struct VSInput
 struct VSOutput
 {
 	float4 svpos : SV_POSITION;
+	float3 worldpos : POS;
 	float3 normal : NORMAL;
 	float2 uv : TEXCOORD;
 };

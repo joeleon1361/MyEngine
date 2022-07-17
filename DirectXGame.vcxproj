@@ -121,6 +121,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -137,6 +138,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -235,6 +237,7 @@
     <ClInclude Include="CircleShadow.h" />
     <ClInclude Include="DebugText.h" />
     <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="DirectXCommon.h" />
     <ClInclude Include="FbxLoader.h" />
     <ClInclude Include="FbxModel.h" />
     <ClInclude Include="FbxObject3d.h" />
@@ -252,6 +255,11 @@
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="WinApp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="imgui\imgui.vcxproj">
+      <Project>{05525985-c110-44d6-a3be-275262fdb18a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

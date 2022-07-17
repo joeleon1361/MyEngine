@@ -29,6 +29,22 @@ FbxModel::~FbxModel()
 	fbxScene->Destroy();
 }
 
+void FbxModel::TransferMaterial()
+{
+	HRESULT result;
+	// 定数バッファへデータ転送
+	ConstBufferDataMaterial* constMapMaterial = nullptr;
+	result = constBuffMaterial->Map(0, nullptr,
+		(void**)&constMapMaterial);
+	if (SUCCEEDED(result)) {
+		constMapMaterial->baseColor = baseColor;
+		constMapMaterial->metalness = metalness;
+		constMapMaterial->specular = specular;
+		constMapMaterial->roughness = roughness;
+		constBuffMaterial->Unmap(0, nullptr);
+	}
+}
+
 // バッファ生成
 void FbxModel::CreatBuffers( ID3D12Device *device )
 {

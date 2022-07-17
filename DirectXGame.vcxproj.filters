@@ -220,5 +220,6 @@
     <ClInclude Include="LightGroup.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="SpotLight.h" />
+    <ClInclude Include="DirectXCommon.h" />
   </ItemGroup>
 </Project>
