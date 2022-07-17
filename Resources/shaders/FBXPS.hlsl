@@ -24,6 +24,15 @@ float3 SchlickFresnel3(float3 f0, float3 f90, float cosine)
 	return lerp(f0, f90, m5);
 }
 
+float GeometricSmith(float cosine)
+{
+	float k = (roughness + 1.0f);
+
+	k = k * k / 8.0f;
+
+	return cosine / (cosine * (1.0f - k) + k);
+}
+
 float3 DisneyFresnel(float LdotH)
 {
 	float luminance = 0.3f * baseColor.r + 0.6f * baseColor.g + 0.1f * baseColor.b;
@@ -50,7 +59,7 @@ float3 CookTorranceSpecular(float NdotL, float NdotV, float NdotH, float LdotH)
 
 	float3 Fs = DisneyFresnel(LdotH);
 
-	float Gs = 1.0f;
+	float Gs = GeometricSmith(NdotL) * GeometricSmith(NdotV);
 
 	float m = 4.0f * NdotL * NdotV;
 
