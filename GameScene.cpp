@@ -8,8 +8,6 @@
 #include"Camera.h"
 #include <stdio.h>
 
-
-
 using namespace DirectX;
 
 static float baseColor[3];
@@ -100,7 +98,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objGround->SetModel(modelGround);
 	objFighter->SetModel(modelFighter);
 
-	testmodel = FbxLoader::GetInstance()->LoadModelFromFile("SpiralPBR");
+	testmodel = FbxLoader::GetInstance()->LoadModelFromFile("SpherePBRMaps");
 
 
 	// FBX3Dオブジェクト生成とモデルとセット
@@ -133,6 +131,7 @@ void GameScene::Update()
 	particleMan->Update();
 	lightGroup->Update();
 
+	// マテリアルパラメータをモデルに反映
 	testmodel->SetBaseColor(XMFLOAT3(baseColor));
 	testmodel->SetMetalness(metalness);
 	testmodel->SetSpecular(specular);
@@ -152,6 +151,16 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
+	// ImGui
+	ImGui::Begin("Material");
+	ImGui::SetWindowPos(ImVec2(0, 0));
+	ImGui::SetWindowSize(ImVec2(300, 130));
+	ImGui::ColorEdit3("baseColor", baseColor, ImGuiColorEditFlags_Float);
+	ImGui::SliderFloat("metalness", &metalness, 0, 1);
+	ImGui::SliderFloat("specular", &specular, 0, 1);
+	ImGui::SliderFloat("roughness", &roughness, 0, 1);
+	ImGui::End();
+
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* cmdList = dxCommon->GetCommandList();
 
@@ -206,15 +215,6 @@ void GameScene::Draw()
 	// スプライト描画後処理
 	Sprite::PostDraw();
 #pragma endregion
-
-	ImGui::Begin("Material");
-	ImGui::SetWindowPos(ImVec2(0, 0));
-	ImGui::SetWindowSize(ImVec2(300, 130));
-	ImGui::ColorEdit3("baseColor", baseColor, ImGuiColorEditFlags_Float);
-	ImGui::SliderFloat("metalness", &metalness, 0, 1);
-	ImGui::SliderFloat("specular", &specular, 0, 1);
-	ImGui::SliderFloat("roughness", &roughness, 0, 1);
-	ImGui::End();
 }
 
 void GameScene::MoveCamera()
@@ -229,10 +229,19 @@ void GameScene::MoveCamera()
 	}
 
 	// カメラ移動
-	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN))
+	if (input->PushKey(DIK_E) || input->PushKey(DIK_C))
 	{
-		if (input->PushKey(DIK_UP)) { camera->MoveVector({ 0.0f,0.0f,+0.06f }); }
-		else if (input->PushKey(DIK_DOWN)) { camera->MoveVector({ 0.0f,0.0f,-0.06f }); }
+		if (input->PushKey(DIK_E)) { camera->MoveVector({ 0.0f,0.0f,+0.06f }); }
+		else if (input->PushKey(DIK_C)) { camera->MoveVector({ 0.0f,0.0f,-0.06f }); }
+	}
+
+	// カメラ視点移動
+	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_LEFT))
+	{
+		if (input->PushKey(DIK_UP)) { camera->MoveEyeVector({ 0.0f,+0.06f,0.0f }); }
+		else if (input->PushKey(DIK_DOWN)) { camera->MoveEyeVector({ 0.0f,-0.06f,0.0f }); }
+		if (input->PushKey(DIK_RIGHT)) { camera->MoveEyeVector({ +0.06f,0.0f,0.0f }); }
+		else if (input->PushKey(DIK_LEFT)) { camera->MoveEyeVector({ -0.06f,0.0f,0.0f }); }
 	}
 }
 

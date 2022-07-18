@@ -32,7 +32,23 @@ struct Node
 	DirectX::XMMATRIX globalTransform;
 
 	// 親ノード
-	Node *parent = nullptr;
+	Node* parent = nullptr;
+};
+
+// テクスチャデータ
+struct TextureData
+{
+	// テクスチャメタデータ
+	DirectX::TexMetadata metadata = {};
+
+	// スクラッチイメージ
+	DirectX::ScratchImage scratchImg = {};
+
+	// テクスチャバッファ
+	Microsoft::WRL::ComPtr<ID3D12Resource> texbuff;
+
+	// SRVのGPUハンドル
+	CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHandle;
 };
 
 class FbxModel
@@ -53,8 +69,11 @@ private: // エイリアス
 	template <class T> using vector = std::vector<T>;
 
 public: // 定数
-// ボーンインデックスの最大数
+	// ボーンインデックスの最大数
 	static const int MAX_BONE_INDICES = 4;
+
+	// テクスチャの最大数
+	static const int MAX_TEXTURES = 4;
 
 public: // サブクラス
 // 頂点データ構造体
@@ -80,10 +99,10 @@ public:
 		DirectX::XMMATRIX invInitialPose;
 
 		// クラスター(FBX側のボーン情報)
-		FbxCluster *fbxCluster;
+		FbxCluster* fbxCluster;
 
 		// コンストラクタ
-		Bone( const std::string &name )
+		Bone(const std::string& name)
 		{
 			this->name = name;
 		}
@@ -110,7 +129,9 @@ public:
 
 public:
 	// 描画
-	void Draw( ID3D12GraphicsCommandList *cmdList );
+	void Draw(ID3D12GraphicsCommandList* cmdList);
+
+	void CreateTexture(TextureData& texture, ID3D12Device* device, int srvIndex);
 
 private: // メンバ変数
 	// モデル名
@@ -119,13 +140,13 @@ private: // メンバ変数
 	// ノード配列
 	std::vector<Node> nodes;
 	// メッシュを持つノード
-	Node *meshNode = nullptr;
+	Node* meshNode = nullptr;
 	// 頂点バッファ
 	ComPtr<ID3D12Resource> vertBuff;
 	// インデックスバッファ
 	ComPtr<ID3D12Resource> indexBuff;
 	// テクスチャバッファ
-	ComPtr<ID3D12Resource> texBuff;
+	// ComPtr<ID3D12Resource> texBuff;
 	// 頂点バッファビュー
 	D3D12_VERTEX_BUFFER_VIEW vbView = {};
 	// インデックスバッファビュー
@@ -142,15 +163,27 @@ private: // メンバ変数
 	// ディフューズ係数
 	DirectX::XMFLOAT3 diffuse = { 1,1,1 };
 	// テクスチャメタデータ
-	DirectX::TexMetadata metadata = {};
+	// DirectX::TexMetadata metadata = {};
 	// スクラッチイメージ
-	DirectX::ScratchImage scratchImg = {};
+	// DirectX::ScratchImage scratchImg = {};
+
+	// ベーステクスチャ
+	TextureData baseTexture;
+
+	// メタルネステクスチャ
+	TextureData metalnessTexture;
+
+	// 法線テクスチャ
+	TextureData normalTexture;
+
+	// ラフネステクスチャ
+	TextureData roughnessTexture;
 
 	// ボーン配列
 	std::vector<Bone> bones;
 
 	// FBXシーン
-	FbxScene *fbxScene = nullptr;
+	FbxScene* fbxScene = nullptr;
 
 	// アルベド
 	DirectX::XMFLOAT3 baseColor = { 1,1,1 };
@@ -167,20 +200,20 @@ private: // メンバ変数
 	// 定数バッファ(マテリアル)
 	ComPtr<ID3D12Resource> constBuffMaterial;
 
-	
+
 
 public:
 	// バッファ生成
-	void CreatBuffers( ID3D12Device *device );
+	void CreatBuffers(ID3D12Device* device);
 
 	// モデルの変形行列取得
-	const XMMATRIX &GetModelTransform() { return meshNode->globalTransform; }
+	const XMMATRIX& GetModelTransform() { return meshNode->globalTransform; }
 
 	// getter
-	std::vector<Bone> &GetBones() { return bones; }
+	std::vector<Bone>& GetBones() { return bones; }
 
 	// getter
-	FbxScene *GetFbxScene() { return fbxScene; }
+	FbxScene* GetFbxScene() { return fbxScene; }
 
 	// デストラクタ
 	~FbxModel();
